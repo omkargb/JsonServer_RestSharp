@@ -1,7 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Collections.Generic;
+using System.Net;
 
 namespace JsonServerTest
 {
@@ -55,6 +57,25 @@ namespace JsonServerTest
             {
                 System.Console.WriteLine("Id: " + emp.id + "\t Name: " + emp.name + "\t Salary: " + emp.salary);
             }
+        }
+
+        [TestMethod]
+        public void GivenEmployee_OnPOSTApi_ShouldReturnAddedEmployee()
+        {
+            RestRequest request = new RestRequest("/employee", Method.POST);
+            JObject jObject = new JObject();        //JObject=Json Object
+            jObject.Add("name", "Om");
+            jObject.Add("salary", "400");
+
+            request.AddParameter("application/json", jObject, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.Created);
+
+            Employee dataResponce = JsonConvert.DeserializeObject<Employee>(response.Content);
+
+            Assert.AreEqual("Om", dataResponce.name); 
+            Assert.AreEqual("400", dataResponce.salary);
+            System.Console.WriteLine(response.Content);
         }
     }
 }
