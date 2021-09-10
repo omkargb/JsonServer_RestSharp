@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="curl" Version="7.30.0.2" />
+    <PackageReference Include="curl-vc141-static-x64" Version="7.59.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\HP\.nuget\packages\libcurl.net.x64\1.4.1\build\\libcurl.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\HP\.nuget\packages\libcurl.net.x64\1.4.1\build\\libcurl.dll" />
+  </ItemGroup>
+
+</Project>
